@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      body {
+        padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
+      }
+    </style>
+    <title>Smart Refrigerator Prototype</title>
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link href="css/prototype.css" rel="stylesheet" media="screen">
+  </head>
+  <body>
+    <div class="container">
+      <h2 align="center">Items</h2>
+      <table class="table table-hover table-bordered">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Quantity</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="success">
+            <td>Eggs</td>
+            <td>60%</td>
+            <td>OK</td>
+          </tr> 
+          <tr class="warning">
+            <td>Milk</td>
+            <td>30%</td>
+            <td>LOW</td>
+          </tr> 
+          <tr class="error">
+            <td>Soup</td>
+            <td>0%</td>
+            <td>OUT</td>
+          </tr> 
+          <tr class="warning">
+            <td>Ground Beef</td>
+            <td>100%</td>
+            <td>EXPIRES SOON</td>
+          </tr> 
+          <tr class="success">
+            <td>Butter</td>
+            <td>75%</td>
+            <td>OK</td>
+          </tr> 
+          <tr class="error">
+            <td>Salsa</td>
+            <td>80%</td>
+            <td>EXPIRED</td>
+          </tr> 
+        </tbody>
+      </table>
+      <!-- Back Button -->
+
+      <form action ="index.html">
+        <button class="btn back-button"> Home </button>
+      </form>
+    </div>
+  </body>
+</html>
+
