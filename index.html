@@ -7,6 +7,7 @@
     <link href="css/prototype.css" rel="stylesheet" media="screen">
     <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.2.min.js" ></script>
     <script type="text/javascript" src="js/bootstrap.js" ></script>
+    <script type="text/javascript" src="js/prototype.js" ></script>
   </head>
   <body>
     <!-- View Calendar, View Items, Add Item, Remove Item, Settings, Help, Dim Screen buttons -->
@@ -39,12 +40,12 @@
         <div class="row-fluid" > 
           <ul class="thumbnails">
             <li class="span3 ">
-            <a href="#addModal" data-toggle="modal" class="thumbnail"> 
+            <a href="#addModal" data-toggle="modal" class="thumbnail item-modal"> 
               <img src="img/scan_in.jpg">
             </a>
             </li>
             <li class="span3 ">
-            <a href="#removeModal" data-toggle="modal" class="thumbnail"> 
+            <a href="#removeModal" data-toggle="modal" class="thumbnail item-modal"> 
               <img src="img/scan_out.jpg">
             </a>
             </li>
@@ -59,8 +60,9 @@
           <h3 id="myModalLabelAdd">Add Item</h3>
         </div>
         <div class="modal-body">
-          <p>Scan Item</p>
-          <p>--Show spinning wheel, then show item added</p>
+          <h4>Scan Your Item</h4>
+          <p class="load-msg"> Item added! </p>
+          <p class="load-prog"> Scanning..please wait. </p>
         </div>
         <div class="modal-footer">
           <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
@@ -74,8 +76,9 @@
           <h3 id="myModalLabel">Remove Item</h3>
         </div>
         <div class="modal-body">
-          <p>Scan Item</p>
-          <p>--Show spinning wheel, then show item removed</p>
+          <h4>Scan Your Item</h4>
+          <p class="load-msg"> Item removed! </p>
+          <p class="load-prog"> Scanning..please wait. </p>
         </div>
         <div class="modal-footer">
           <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
