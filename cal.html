@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Smart Refrigerator Prototype</title>
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link href="css/bootstrap.calendar.css" rel="stylesheet" media="screen"> 
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.2.min.js" ></script>
+    <script type="text/javascript" src="js/bootstrap.js" ></script>
+    <script type="text/javascript" src="js/bootstrap.calendar.js" ></script>
+
+    <style>
+      body {
+        padding-top: 30px; /* 60px to make the container go all the way to the bottom of the topbar */
+      }
+    </style>
+
+    <script type="text/javascript">
+        $(document).ready(function(){
+
+          var evnts = function(){
+              return {
+                      "event":
+                          [
+                               {"date":"2012-01-25","title":"1"}
+                              ,{"date":"2012-02-01","title":"2"}
+                              ,{"date":"2012-03-22","title":"34"}
+                              ,{"date":"2012-04-03","title":"123"}
+                              ,{"date":"2012-05-04","title":"223"}
+                              ,{"date":"2012-06-28","title":"4"}
+                              ,{"date":"2012-07-28","title":"5"}
+                              ,{"date":"2012-08-16","title":"14"}
+                              ,{"date":"2012-09-21","title":"10"}
+                              ,{"date":"2012-10-21","title":"10"}
+                              ,{"date":"2012-11-21","title":"10"}
+                              ,{"date":"2012-12-21","title":"10"}
+			      ,{"date":"2012-05-03","title":"1500"}
+			      ,{"date":"2012-05-04","title":"1501"}
+                          ]
+                      }
+          };
+
+         $('#calendar').Calendar({ 'events': evnts, 'weekStart': 1 })
+         .on('changeDay', function(event){ alert(event.day.valueOf()); })
+         .on('onEvent', function(event){ alert(event.day.valueOf()); })
+         .on('onNext', function(event){ alert("Next"); })
+         .on('onPrev', function(event){ alert("Prev"); })
+         .on('onCurrent', function(event){ alert("Current"); });
+      });
+    </script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="span12" id="calendar"></div>
+      </div>
+    </div> <!-- /container -->
+
+  </body>
+</html>
+
