@@ -5,6 +5,8 @@
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
     <link href="css/prototype.css" rel="stylesheet" media="screen">
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.2.min.js" ></script>
+    <script type="text/javascript" src="js/bootstrap.js" ></script>
   </head>
   <body>
     <!-- View Calendar, View Items, Add Item, Remove Item, View List, Settings,
@@ -48,18 +50,48 @@
             </a>
             </li>
             <li class="span3 ">
-            <a href="#" class="thumbnail"> 
+            <a href="#addModal" data-toggle="modal" class="thumbnail"> 
               <img src="http://placehold.it/260x180">
             </a>
             </li>
             <li class="span3 ">
-            <a href="#" class="thumbnail"> 
+            <a href="#removeModal" data-toggle="modal" class="thumbnail"> 
               <img src="http://placehold.it/260x180">
             </a>
             </li>
           </ul>
         </div>
       </div>
+
+      <!-- Add modal -->
+      <div id="addModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabelAdd" aria-hidden="true">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+          <h3 id="myModalLabelAdd">Add Item</h3>
+        </div>
+        <div class="modal-body">
+          <p>Scan Item</p>
+          <p>--Show spinning wheel, then show item added</p>
+        </div>
+        <div class="modal-footer">
+          <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+        </div>
+      </div>
+      <!-- Remove Modal -->
+      <div id="removeModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+          <h3 id="myModalLabel">Remove Item</h3>
+        </div>
+        <div class="modal-body">
+          <p>Scan Item</p>
+          <p>--Show spinning wheel, then show item removed</p>
+        </div>
+        <div class="modal-footer">
+          <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+        </div>
+      </div>
+
     </div>
   </body>
 </html>
