@@ -7,6 +7,7 @@
     <link href="css/prototype.css" rel="stylesheet" media="screen">
     <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.2.min.js" ></script>
     <script type="text/javascript" src="js/bootstrap.js" ></script>
+    <script type="text/javascript" src="js/prototype.js" ></script>
     <style>
       body {
         padding-top: 30px; /* 60px to make the container go all the way to the bottom of the topbar */
@@ -68,7 +69,7 @@
       <br>
       <div class ="row">
         <div class ="btn-group span3 offset3" >
-          <button class="btn "> Save </button>
+          <button id="save-btn" class="btn " data-loading-text="Saving..."> Save </button>
           <button class="btn"> Cancel </button>
         </div>
         <form action ="index.html">
