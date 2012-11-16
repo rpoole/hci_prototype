@@ -82,7 +82,7 @@
       <!-- Back Button -->
 
       <div class="row-fluid">
-        <button class="btn span2 offset5"> Shopping List </button>
+        <button id="shop-btn" class="btn span2 offset5" data-toggle="modal" href="#shopModal"> Shopping List </button>
       </div>
       <br><br>
       <div class="row-fluid">
@@ -91,6 +91,20 @@
         </form>
       </div>
     </div>
+
+      <!-- Shopping List  Modal -->
+      <div id="shopModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="lbl" aria-hidden="true">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+          <h3 id="lbl">Shopping List</h3>
+        </div>
+        <div id="slist-body" class="modal-body">
+        </div>
+        <div class="modal-footer">
+          <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+        </div>
+      </div>
+
   </body>
 </html>
 

@@ -97,6 +97,10 @@ $(document).ready(function(){
     }, 3000);
   });
 
+  $('#shop-btn').click(function() {
+
+  });
+
 });
 
 
