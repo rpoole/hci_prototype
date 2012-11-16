@@ -23,101 +23,101 @@
     <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.2.min.js" ></script>
     <script type="text/javascript" src="js/bootstrap.js" ></script>
     <script type="text/javascript" src="js/prototype.js" ></script>
-  </head>
-  <body>
-    <div class="container">
-      <h2 align="center">Items</h2>
-      <div class="row">
-        <div class="btn-group span4" data-toggle="buttons-checkbox">
-          <label> Filters </label>
-          <button id="okfilter" type="button" class="btn filter-btn">OK</button>
-          <button id="lowfilter" type="button" class="btn filter-btn">LOW</button>
-          <button id="outfilter" type="button" class="btn filter-btn">OUT</button>
-          <button id="expsoonfilter" type="button" class="btn filter-btn">EXPIRES SOON</button>
-          <button id="expfilter" type="button" class="btn filter-btn">EXPIRED</button>
+    </head>
+    <body>
+      <div class="container">
+        <h2 align="center">Items</h2>
+        <div class="row">
+          <div class="btn-group span4" data-toggle="buttons-checkbox">
+            <label> Filters </label>
+            <button id="okfilter" type="button" class="btn filter-btn">OK</button>
+            <button id="lowfilter" type="button" class="btn filter-btn">LOW</button>
+            <button id="outfilter" type="button" class="btn filter-btn">OUT</button>
+            <button id="expsoonfilter" type="button" class="btn filter-btn">EXPIRES SOON</button>
+            <button id="expfilter" type="button" class="btn filter-btn">EXPIRED</button>
+          </div>
         </div>
-      </div>
-      <br>
-      <table id="item-list" class="table table-hover table-bordered">
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Quantity</th>
-            <th>Status</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr class="success">
-            <td>Eggs</td>
-            <td>60%</td>
-            <td>OK</td>
-          </tr> 
-          <tr class="warning">
-            <td>Milk</td>
-            <td>30%</td>
-            <td>LOW</td>
-          </tr> 
-          <tr class="error">
-            <td>Soup</td>
-            <td>0%</td>
-            <td>OUT</td>
-          </tr> 
-          <tr class="warning">
-            <td>Ground Beef</td>
-            <td>100%</td>
-            <td>EXPIRES SOON</td>
-          </tr> 
-          <tr class="success">
-            <td>Butter</td>
-            <td>75%</td>
-            <td>OK</td>
-          </tr> 
-          <tr class="error">
-            <td>Salsa</td>
-            <td>80%</td>
-            <td>EXPIRED</td>
-          </tr> 
-        </tbody>
-      </table>
-      <!-- Back Button -->
-
-      <div class="row-fluid">
-        <button id="shop-btn" class="btn span2 offset5" data-toggle="modal" href="#shopModal"> Shopping List </button>
-      </div>
-      <br><br>
-      <div class="row-fluid">
-        <form action ="index.html">
-          <button class="btn back-button"> Home </button>
-        </form>
-      </div>
-    </div>
-
-    <!-- Shopping List  Modal -->
-    <div id="shopModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="lbl" aria-hidden="true">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
-        <h3 id="lbl">Shopping List</h3>
-      </div>
-      <div id="slist-body" class="modal-body">
-        <div class="input-append">
-          <input id="modal-input" type="text" placeholder="Add food">
-          <a id="modal-add" class="btn" href="#"><i class="icon-plus"></i></a>
-        </div>
-        <table id="apd-table" class="table table-hover table-bordered">
+        <br>
+        <table id="item-list" class="table table-hover table-bordered">
           <thead>
             <tr>
               <th>Name</th>
+              <th>Quantity</th>
+              <th>Status</th>
             </tr>
           </thead>
           <tbody>
+            <tr class="success rmv">
+              <td>Eggs</td>
+              <td>60%</td>
+              <td>OK</td>
+            </tr> 
+            <tr class="warning ">
+              <td>Milk</td>
+              <td>30%</td>
+              <td>LOW</td>
+            </tr> 
+            <tr class="error rmv">
+              <td>Soup</td>
+              <td>0%</td>
+              <td>OUT</td>
+            </tr> 
+            <tr class="warning">
+              <td>Ground Beef</td>
+              <td>100%</td>
+              <td>EXPIRES SOON</td>
+            </tr> 
+            <tr class="success">
+              <td>Butter</td>
+              <td>75%</td>
+              <td>OK</td>
+            </tr> 
+            <tr class="error rmv">
+              <td>Salsa</td>
+              <td>80%</td>
+              <td>EXPIRED</td>
+            </tr> 
           </tbody>
         </table>
-      </div>
-      <div class="modal-footer">
-        <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-      </div>
-    </div>
+        <!-- Back Button -->
 
-  </body>
-</html>
+        <div class="row-fluid">
+          <button id="shop-btn" class="btn span2 offset5" data-toggle="modal" href="#shopModal"> Shopping List </button>
+        </div>
+        <br><br>
+        <div class="row-fluid">
+          <form action ="index.html">
+            <button class="btn back-button"> Home </button>
+          </form>
+        </div>
+      </div>
+
+      <!-- Shopping List  Modal -->
+      <div id="shopModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="lbl" aria-hidden="true">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+          <h3 id="lbl">Shopping List</h3>
+        </div>
+        <div id="slist-body" class="modal-body">
+          <div class="input-append">
+            <input id="modal-input" type="text" placeholder="Add food">
+            <a id="modal-add" class="btn" href="#"><i class="icon-plus"></i></a>
+          </div>
+          <table id="apd-table" class="table table-hover table-bordered">
+            <thead>
+              <tr>
+                <th>Name</th>
+              </tr>
+            </thead>
+            <tbody>
+            </tbody>
+          </table>
+        </div>
+        <div class="modal-footer">
+          <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+        </div>
+      </div>
+
+    </body>
+  </html>
 

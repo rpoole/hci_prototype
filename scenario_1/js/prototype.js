@@ -1,15 +1,15 @@
 grayedOut = false
 
 function getURLParameter(name) {
-    return decodeURI(
-        (RegExp(name + '=' + '(.+?)(&|$)').exec(location.search)||[,null])[1]
-    );
+  return decodeURI(
+      (RegExp(name + '=' + '(.+?)(&|$)').exec(location.search)||[,null])[1]
+      );
 }
 
 function filter_table(filter_text){
   $("td").each(function() {
     if ($(this).text() == filter_text) 
-        $(this).closest('tr').toggle();
+    $(this).closest('tr').toggle();
   });
 }
 
@@ -74,16 +74,16 @@ function grayOut(vis, options) {
         });
         }
 
-function fill_table(table){
-  $('#item-list tr').each( function() {
-      var name = $(this).children().eq(0).text();
-      var stats = $(this).children().eq(2).text();
+        function fill_table(table){
+          $('#item-list tr').each( function() {
+            var name = $(this).children().eq(0).text();
+            var stats = $(this).children().eq(2).text();
 
-      if (stats == 'LOW' || stats == 'OUT' || stats == 'EXPIRED' || stats == 'EXPIRES SOON'){
-        $(table).append('<tr><td>'+name+'</tr></td>');
-      }
-  });
-}
+            if (stats == 'LOW' || stats == 'OUT' || stats == 'EXPIRED' || stats == 'EXPIRES SOON'){
+              $(table).append('<tr><td>'+name+'</tr></td>');
+            }
+          });
+        }
 
 
 $(document).ready(function(){
@@ -101,8 +101,8 @@ $(document).ready(function(){
   });
 
   $('.filter-btn').click(function() {
-   var filter_txt = $(this).text(); 
-   filter_table(filter_txt);
+    var filter_txt = $(this).text(); 
+    filter_table(filter_txt);
 
   });
 
@@ -113,6 +113,18 @@ $(document).ready(function(){
       $('.load-prog').hide();
       $('.load-msg').show();
     }, 3000);
+  });
+
+  $('#removeModal').click(function() {
+    href = $('#items-link').attr("href");
+    href = href + "&removed=true";
+    $('#items-link').attr("href", href);
+  });
+
+  $('#addModal').click(function() {
+    href = $('#items-link').attr("href");
+    href = href + "&added=true";
+    $('#items-link').attr("href", href);
   });
 
   $('#shop-btn').click(function() {
@@ -127,9 +139,19 @@ $(document).ready(function(){
 
   $('#modal-add').click(function() {
     var txt = $('#modal-input').val();
-    $('#apd-table > tbody').append('<tr><td>'+txt+'</tr></td>');
+    $('#apd-table > tbody').append('<tr><td>'+txt+'</td></tr>');
   });
 
+  added = getURLParameter('added');
+  if ( added == 'true' ) {
+    var txt = "";
+    var names = ['Milk', 'Eggs', 'Salsa', 'Soup', 'Soda', 'Ketchup'];
+    for (var i =0; i < 6; i++){
+      txt = txt + '<tr class="success"><td>'+names[i]+'</td><td>100%</td><td>OK</td></tr>';
+    }
+    $('#item-list > tbody').append(txt);
+
+  }
 });
 
 

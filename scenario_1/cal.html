@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Smart Refrigerator Prototype</title>
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link href="css/bootstrap.calendar.css" rel="stylesheet" media="screen"> 
+    <link href="css/prototype.css" rel="stylesheet" media="screen"> 
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.2.min.js" ></script>
+    <script type="text/javascript" src="js/bootstrap.js" ></script>
+    <script type="text/javascript" src="js/bootstrap.calendar.js" ></script>
+
+    <style>
+      body {
+        padding-top: 20px; /* 60px to make the container go all the way to the bottom of the topbar */
+      }
+    </style>
+
+    <script type="text/javascript">
+      $(document).ready(function(){
+
+          var evnts = function(){
+          return {
+          "event":
+          [
+          ]
+          }
+          };
+
+          $('#calendar').Calendar({ 'events': evnts, 'weekStart': 1 })
+            .on('changeDay', function(event){ $('#expiresModal').modal(); })
+      });
+</script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="span12" id="calendar"></div>
+      </div>
+      <!-- Back Button -->
+      <br>
+      <form action ="index.html">
+        <button class="btn back-button"> Home </button>
+      </form>
+    </div> <!-- /container -->
+
+      <!-- Expries Modal -->
+      <div id="expiresModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+          <h3 id="myModalLabel"> Food Status</h3>
+        </div>
+        <div class="modal-body">
+          Eggs expire today.<br>
+          Salsa expired 2 weeks ago.
+        </div>
+        <div class="modal-footer">
+          <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+        </div>
+      </div>
+  </body>
+</html>
+
