@@ -68,6 +68,18 @@ function grayOut(vis, options) {
         });
         }
 
+function fill_table(table){
+  $('#item-list tr').each( function() {
+      var name = $(this).children().eq(0).text();
+      var stats = $(this).children().eq(2).text();
+
+      if (stats == 'LOW' || stats == 'OUT' || stats == 'EXPIRED' || stats == 'EXPIRES SOON'){
+        $(table).append('<tr><td>'+name+'</tr></td>');
+      }
+  });
+}
+
+
 $(document).ready(function(){
   $('#dimmer').click(function() {
     grayedOut = !grayedOut;
@@ -98,7 +110,18 @@ $(document).ready(function(){
   });
 
   $('#shop-btn').click(function() {
+    fill_table('#apd-table > tbody');
+  });
 
+  $('#shopModal').on('hidden', function () {
+    $('#apd-table tr:gt(0)').each( function() {
+      $(this).remove();
+    });
+  });
+
+  $('#modal-add').click(function() {
+    var txt = $('#modal-input').val();
+    $('#apd-table > tbody').append('<tr><td>'+txt+'</tr></td>');
   });
 
 });

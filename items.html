@@ -28,17 +28,17 @@
     <div class="container">
       <h2 align="center">Items</h2>
       <div class="row">
-          <div class="btn-group span4" data-toggle="buttons-checkbox">
-            <label> Filters </label>
-            <button id="okfilter" type="button" class="btn filter-btn">OK</button>
-            <button id="lowfilter" type="button" class="btn filter-btn">LOW</button>
-            <button id="outfilter" type="button" class="btn filter-btn">OUT</button>
-            <button id="expsoonfilter" type="button" class="btn filter-btn">EXPIRES SOON</button>
-            <button id="expfilter" type="button" class="btn filter-btn">EXPIRED</button>
-          </div>
+        <div class="btn-group span4" data-toggle="buttons-checkbox">
+          <label> Filters </label>
+          <button id="okfilter" type="button" class="btn filter-btn">OK</button>
+          <button id="lowfilter" type="button" class="btn filter-btn">LOW</button>
+          <button id="outfilter" type="button" class="btn filter-btn">OUT</button>
+          <button id="expsoonfilter" type="button" class="btn filter-btn">EXPIRES SOON</button>
+          <button id="expfilter" type="button" class="btn filter-btn">EXPIRED</button>
+        </div>
       </div>
       <br>
-      <table class="table table-hover table-bordered">
+      <table id="item-list" class="table table-hover table-bordered">
         <thead>
           <tr>
             <th>Name</th>
@@ -92,18 +92,31 @@
       </div>
     </div>
 
-      <!-- Shopping List  Modal -->
-      <div id="shopModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="lbl" aria-hidden="true">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
-          <h3 id="lbl">Shopping List</h3>
-        </div>
-        <div id="slist-body" class="modal-body">
-        </div>
-        <div class="modal-footer">
-          <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-        </div>
+    <!-- Shopping List  Modal -->
+    <div id="shopModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="lbl" aria-hidden="true">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+        <h3 id="lbl">Shopping List</h3>
       </div>
+      <div id="slist-body" class="modal-body">
+        <div class="input-append">
+          <input id="modal-input" type="text" placeholder="Add food">
+          <a id="modal-add" class="btn" href="#"><i class="icon-plus"></i></a>
+        </div>
+        <table id="apd-table" class="table table-hover table-bordered">
+          <thead>
+            <tr>
+              <th>Name</th>
+            </tr>
+          </thead>
+          <tbody>
+          </tbody>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+      </div>
+    </div>
 
   </body>
 </html>

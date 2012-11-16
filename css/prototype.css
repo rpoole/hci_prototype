@@ -5,3 +5,7 @@
 .back-button {
   margin-left:46.5%;
 }
+
+.input-append button.add-on {
+    height: inherit !important;
+}
