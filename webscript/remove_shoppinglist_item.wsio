@@ -1,0 +1,27 @@
+function removeitem(itemlist, item)
+	-- make sure we have these passed in
+	if item == "" then
+		return -1
+	end
+	
+	-- find the index of the item we want
+	for i,v in ipairs(itemlist) do
+		if v.item == item then
+			-- remove item
+			table.remove(itemlist, i)
+			break
+		end
+	end
+end
+ 
+-- ensure that only one process modifies the data at a time
+lease.acquire('shoppinglistDB')
+ 
+local items = json.parse(storage.shoppinglistDB or '[]')
+itemname = request.query.item_name or ""
+removeitem(items,itemname)
+storage.shoppinglistDB = json.stringify(items)
+ 
+lease.release('shoppinglistDB')
+ 
+return items
