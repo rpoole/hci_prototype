@@ -1,18 +1,30 @@
 grayedOut = false
 
+function validateDate(date){
+  var re = /\d{2}-\d{2}-\d{4}/;
+  return re.test(date);
+}
+
+function capitalizeFirstLetter(string){
+  return string.toLowerCase().replace(/\b[a-z]/g, function(letter) {
+    return letter.toUpperCase();
+  });
+}
+
 function getURLParameter(name) {
     return decodeURI(
         (RegExp(name + '=' + '(.+?)(&|$)').exec(location.search)||[,null])[1]
     );
 }
 
-function dbInsertItem(itemname, quantity, onSuccess){
+function dbInsertItem(itemname, quantity, expires, onSuccess){
     $.ajax({
       type: 'GET',
       url: 'http://hcigroup3.webscript.io/test/insert_item',
       data: {
         'item_name' : itemname,
-        'quantity' : quantity
+        'quantity' : quantity,
+        'expires' : expires
       },
       success : onSuccess
     });
@@ -27,6 +39,10 @@ function dbRemoveItem(itemname, onSuccess){
       },
       success : onSuccess
     });
+}
+
+function dbGetItems(onSuccess) {
+  $.getJSON('http://hcigroup3.webscript.io/test/get_items', onSuccess);
 }
 
 function filter_table(filter_text){
@@ -108,8 +124,35 @@ function fill_table(table){
   });
 }
 
+function fill_item_list_table() {
+    $('#item-list tbody').empty();
+    /* fill the table with initial data / quantity */
+    dbGetItems(function(items) {
+      $.each(items, function(i, item){
+        // setup status / classes - really sloppy but gets the job done
+        var tr_class = "error"; 
+        var item_status = "OK";
+        if (item.quantity > 30){
+          tr_class = "success"
+        } 
+        else if ( item.quantity > 0 ){
+          item_status = "LOW";
+        }
+        else{
+          item_status = "OUT";
+        }
+        
+        item_text = capitalizeFirstLetter(item.item);
+        $('#item-list > tbody').append('<tr class="' + tr_class + '"><td>'+ item_text 
+          +'</td><td>'+item.quantity+'%</td><td>'+item_status+'</td><td>'+ item.expires +
+          '</td></tr>');
+      });
+    });
+}
 
 $(document).ready(function(){
+ fill_item_list_table();
+
   $('#dimmer').click(function() {
     grayedOut = !grayedOut;
     grayOut(grayedOut);
@@ -156,9 +199,9 @@ $(document).ready(function(){
   });
 
   $('#item-remove-modal-button').click(function () {
-   name = $('#item-remove-modal-name').val();
+   name = $('#item-remove-modal-name').val().toLowerCase();
    dbRemoveItem(name, function () {
-    $('#item-remove-modal-name').val('Item Name');
+    $('#item-remove-modal-name').val('');
     $('#item-remove-modal-success-alert').show();
 
     setTimeout(function() {
@@ -169,11 +212,23 @@ $(document).ready(function(){
   });
 
   $('#item-insert-modal-button').click(function () {
-   name = $('#item-insert-modal-name').val();
+   $('#item-insert-modal-date-error-alert').hide();
+   name = $('#item-insert-modal-name').val().toLowerCase();
+   expires = $('#item-insert-modal-expires').val();
    quantity = '100';
-   dbInsertItem(name, quantity, function () {
-    $('#item-insert-modal-name').val('Item Name');
+
+   if (!validateDate(expires)){
+    $('#item-insert-modal-date-error-alert').show();
+    return;
+   }
+
+
+   $('body').css('cursor','wait');
+   dbInsertItem(name, quantity, expires, function () {
+    $('#item-insert-modal-name').val('');
+    $('#item-insert-modal-expires').val('');
     $('#item-insert-modal-success-alert').show();
+    $('body').css('cursor','default');
 
     setTimeout(function() {
       $('#item-insert-modal-success-alert').hide();
@@ -181,6 +236,9 @@ $(document).ready(function(){
 
    });
   });
+
+  
+
 
 });
 

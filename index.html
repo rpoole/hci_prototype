@@ -60,16 +60,18 @@
           <h3 id="myModalLabelAdd">Add Item</h3>
         </div>
         <div class="modal-body">
-          <h5>Enter item to insert</h5>
+          <h5>Enter item to insert and expiration date</h5>
+          <div id="item-insert-modal-date-error-alert" class="alert alert-error" style="display: none;">
+            Make sure you enter the date like this: DD-MM-YYYY.
+          </div>
           <div id="item-insert-modal-success-alert" class="alert alert-success" style="display: none;">
             Item inserted!
           </div>
           <div  class="form-inline">
             <input id="item-insert-modal-name" type = "text" class="input-small" placeholder="Item Name">
+            <input id="item-insert-modal-expires" type = "text" class="input-small" placeholder="MM-DD-YYYY">
             <button id="item-insert-modal-button" type="submit" class="btn"> Insert </button>
           </div>
-          <h5> Or Scan it in </h5>
-          <button type="submit" class="btn"> Scan </button>
         </div>
         <div class="modal-footer">
           <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
@@ -91,8 +93,6 @@
             <input id="item-remove-modal-name" type = "text" class="input-small" placeholder="Item Name">
             <button id="item-remove-modal-button" type="submit" class="btn"> Remove </button>
           </div>
-          <h5> Or Scan it out </h5>
-          <button type="submit" class="btn"> Scan </button>
         </div>
         <div class="modal-footer">
           <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
