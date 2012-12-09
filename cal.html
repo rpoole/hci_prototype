@@ -42,6 +42,7 @@
           }
           };
 
+
           $('#calendar').Calendar({ 'events': evnts, 'weekStart': 1 }).on('changeDay', function(event){
             var dayStr = event.day.valueOf().toString();
             var monthStr = event.month.valueOf().toString();
@@ -56,14 +57,29 @@
             }
 
             var date = monthStr + "-" + dayStr + "-" + yearStr;
-
+            
+            $('#cal-modal-body').empty();
             $.each(item_list, function(i, item){
               if(item.expires == date){
               $('#cal-modal-body').append(capitalizeFirstLetter(item.item) + ' expires today!<br>');
                 $('#expiresModal').modal();
                 }
               });
-            });
+          }).on('onNext', function(event){
+            $.each(item_list, function(i, item){
+              day = item.expires.split('-')[1];
+              month = item.expires.split('-')[0];
+              year = item.expires.split('-')[2];
+              $('td[day=' + parseInt(day)+'][month=' + parseInt(month) + '][year=' + year + ']').addClass('cal-event');
+              });
+            }).on('onPrev', function(event){
+            $.each(item_list, function(i, item){
+              day = item.expires.split('-')[1];
+              month = item.expires.split('-')[0];
+              year = item.expires.split('-')[2];
+              $('td[day=' + parseInt(day)+'][month=' + parseInt(month) + '][year=' + year + ']').addClass('cal-event');
+              });
+              });
           }
       });
 </script>
