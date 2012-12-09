@@ -56,13 +56,17 @@
       <!-- Add modal -->
       <div id="addModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabelAdd" aria-hidden="true">
         <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+          <a class="close" data-dismiss="modal" aria-hidden="true">x</a>
           <h3 id="myModalLabelAdd">Add Item</h3>
         </div>
         <div class="modal-body">
-          <h4>Scan Your Item</h4>
-          <p class="load-msg"> Item added! </p>
-          <p class="load-prog"> Scanning..please wait. </p>
+          <h5>Enter item to insert</h5>
+          <div  class="form-inline">
+            <input id="item-insert-modal-name" type = "text" class="input-small" placeholder="Item Name">
+            <button id="item-insert-modal-button" type="submit" class="btn"> Insert </button>
+          </div>
+          <h5> Or Scan it in </h5>
+          <button type="submit" class="btn"> Scan </button>
         </div>
         <div class="modal-footer">
           <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
@@ -72,13 +76,17 @@
       <!-- Remove Modal -->
       <div id="removeModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+          <a class="close" data-dismiss="modal" >x</a>
           <h3 id="myModalLabel">Remove Item</h3>
         </div>
         <div class="modal-body">
-          <h4>Scan Your Item</h4>
-          <p class="load-msg"> Item removed! </p>
-          <p class="load-prog"> Scanning..please wait. </p>
+          <h5>Enter item to remove</h5>
+          <div  class="form-inline">
+            <input id="item-remove-modal-name" type = "text" class="input-small" placeholder="Item Name">
+            <button id="item-remove-modal-button" type="submit" class="btn"> Remove </button>
+          </div>
+          <h5> Or Scan it out </h5>
+          <button type="submit" class="btn"> Scan </button>
         </div>
         <div class="modal-footer">
           <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>

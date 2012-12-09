@@ -6,6 +6,29 @@ function getURLParameter(name) {
     );
 }
 
+function dbInsertItem(itemname, quantity, onSuccess){
+    $.ajax({
+      type: 'GET',
+      url: 'http://hcigroup3.webscript.io/test/insert_item',
+      data: {
+        'item_name' : itemname,
+        'quantity' : quantity
+      },
+      success : onSuccess
+    });
+}
+
+function dbRemoveItem(itemname, onSuccess){
+    $.ajax({
+      type: 'GET',
+      url: 'http://hcigroup3.webscript.io/test/remove_item',
+      data: {
+        'item_name' : itemname
+      },
+      success : onSuccess
+    });
+}
+
 function filter_table(filter_text){
   $("td").each(function() {
     if ($(this).text() == filter_text) 
@@ -106,14 +129,16 @@ $(document).ready(function(){
 
   });
 
-  $('.item-modal').click(function() {
+/*  
+ *  Hides / shows scanning message when modals are clicked. 
+ *  $('.item-modal').click(function() {
     $('.load-prog').show();
     $('.load-msg').hide();
     setTimeout(function() {
       $('.load-prog').hide();
       $('.load-msg').show();
     }, 3000);
-  });
+  }); */
 
   $('#shop-btn').click(function() {
     fill_table('#apd-table > tbody');
@@ -128,6 +153,22 @@ $(document).ready(function(){
   $('#modal-add').click(function() {
     var txt = $('#modal-input').val();
     $('#apd-table > tbody').append('<tr><td>'+txt+'</tr></td>');
+  });
+
+  $('#item-remove-modal-button').click(function () {
+   name = $('#item-remove-modal-name').val();
+   dbRemoveItem(name, function () {
+     alert("Removed!");
+   });
+  });
+
+
+  $('#item-insert-modal-button').click(function () {
+   name = $('#item-insert-modal-name').val();
+   quantity = '100';
+   dbInsertItem(name, quantity, function () {
+     alert("Inserted!");
+   });
   });
 
 });
