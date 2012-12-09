@@ -59,7 +59,6 @@
 
             $.each(item_list, function(i, item){
               if(item.expires == date){
-                $('#cal-modal-body').text('');
                 $('#cal-modal-body').text(capitalizeFirstLetter(item.item) + ' expires today!');
                 $('#expiresModal').modal();
                 }
