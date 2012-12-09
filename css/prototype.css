@@ -13,3 +13,10 @@
 .cal-event {
   background-color : #bd362f;
 }
+
+table .btn{
+  padding: 1px 5px 1px;
+  font-size: 10px;
+  margin-right: -3px;
+  float: right;
+}

@@ -12,43 +12,69 @@ function capitalizeFirstLetter(string){
 }
 
 function getURLParameter(name) {
-    return decodeURI(
-        (RegExp(name + '=' + '(.+?)(&|$)').exec(location.search)||[,null])[1]
-    );
+  return decodeURI(
+      (RegExp(name + '=' + '(.+?)(&|$)').exec(location.search)||[,null])[1]
+      );
 }
 
 function dbInsertItem(itemname, quantity, expires, onSuccess){
-    $.ajax({
-      type: 'GET',
-      url: 'http://hcigroup3.webscript.io/test/insert_item',
-      data: {
-        'item_name' : itemname,
-        'quantity' : quantity,
-        'expires' : expires
-      },
-      success : onSuccess
-    });
+  $.ajax({
+    type: 'GET',
+  url: 'http://hcigroup3.webscript.io/test/insert_item',
+  data: {
+    'item_name' : itemname,
+  'quantity' : quantity,
+  'expires' : expires
+  },
+  success : onSuccess
+  });
 }
 
 function dbRemoveItem(itemname, onSuccess){
-    $.ajax({
-      type: 'GET',
-      url: 'http://hcigroup3.webscript.io/test/remove_item',
-      data: {
-        'item_name' : itemname
-      },
-      success : onSuccess
-    });
+  $.ajax({
+    type: 'GET',
+  url: 'http://hcigroup3.webscript.io/test/remove_item',
+  data: {
+    'item_name' : itemname
+  },
+  success : onSuccess
+  });
 }
 
 function dbGetItems(onSuccess) {
   $.getJSON('http://hcigroup3.webscript.io/test/get_items', onSuccess);
 }
 
+function shopdbInsertItem(itemname, onSuccess){
+  $.ajax({
+    type: 'GET',
+  url: 'http://hcigroup3.webscript.io/test/add_shoppinglist_item',
+  data: {
+    'item_name' : itemname
+  },
+  success : onSuccess
+  });
+}
+
+function shopdbRemoveItem(itemname, onSuccess){
+  $.ajax({
+    type: 'GET',
+  url: 'http://hcigroup3.webscript.io/test/remove_shoppinglist_item',
+  data: {
+    'item_name' : itemname
+  },
+  success : onSuccess
+  });
+}
+
+function shopdbGetItems(onSuccess) {
+  $.getJSON('http://hcigroup3.webscript.io/test/get_shoppinglist', onSuccess);
+}
+
 function filter_table(filter_text){
   $("td").each(function() {
     if ($(this).text() == filter_text) 
-        $(this).closest('tr').toggle();
+    $(this).closest('tr').toggle();
   });
 }
 
@@ -113,45 +139,45 @@ function grayOut(vis, options) {
         });
         }
 
-function fill_table(table){
-  $('#item-list tr').each( function() {
-      var name = $(this).children().eq(0).text();
-      var stats = $(this).children().eq(2).text();
+        function fill_table(table){
+          $('#item-list tr').each( function() {
+            var name = $(this).children().eq(0).text();
+            var stats = $(this).children().eq(2).text();
 
-      if (stats == 'LOW' || stats == 'OUT' || stats == 'EXPIRED' || stats == 'EXPIRES SOON'){
-        $(table).append('<tr><td>'+name+'</tr></td>');
+            if (stats == 'LOW' || stats == 'OUT' || stats == 'EXPIRED' || stats == 'EXPIRES SOON'){
+              $(table).append('<tr><td>'+name+'</tr></td>');
+            }
+          });
+        }
+
+function fill_item_list_table() {
+  $('#item-list tbody').empty();
+  /* fill the table with initial data / quantity */
+  dbGetItems(function(items) {
+    $.each(items, function(i, item){
+      // setup status / classes - really sloppy but gets the job done
+      var tr_class = "error"; 
+      var item_status = "OK";
+      if (item.quantity > 30){
+        tr_class = "success"
+      } 
+      else if ( item.quantity > 0 ){
+        item_status = "LOW";
       }
+      else{
+        item_status = "OUT";
+      }
+
+    item_text = capitalizeFirstLetter(item.item);
+    $('#item-list > tbody').append('<tr class="' + tr_class + '"><td>'+ item_text 
+      +'</td><td>'+item.quantity+'%</td><td>'+item_status+'</td><td>'+ item.expires +
+      '</td></tr>');
+    });
   });
 }
 
-function fill_item_list_table() {
-    $('#item-list tbody').empty();
-    /* fill the table with initial data / quantity */
-    dbGetItems(function(items) {
-      $.each(items, function(i, item){
-        // setup status / classes - really sloppy but gets the job done
-        var tr_class = "error"; 
-        var item_status = "OK";
-        if (item.quantity > 30){
-          tr_class = "success"
-        } 
-        else if ( item.quantity > 0 ){
-          item_status = "LOW";
-        }
-        else{
-          item_status = "OUT";
-        }
-        
-        item_text = capitalizeFirstLetter(item.item);
-        $('#item-list > tbody').append('<tr class="' + tr_class + '"><td>'+ item_text 
-          +'</td><td>'+item.quantity+'%</td><td>'+item_status+'</td><td>'+ item.expires +
-          '</td></tr>');
-      });
-    });
-}
-
 $(document).ready(function(){
- fill_item_list_table();
+  fill_item_list_table();
 
   $('#dimmer').click(function() {
     grayedOut = !grayedOut;
@@ -167,77 +193,106 @@ $(document).ready(function(){
   });
 
   $('.filter-btn').click(function() {
-   var filter_txt = $(this).text(); 
-   filter_table(filter_txt);
+    var filter_txt = $(this).text(); 
+    filter_table(filter_txt);
 
   });
 
-/*  
- *  Hides / shows scanning message when modals are clicked. 
- *  $('.item-modal').click(function() {
-    $('.load-prog').show();
-    $('.load-msg').hide();
-    setTimeout(function() {
-      $('.load-prog').hide();
-      $('.load-msg').show();
-    }, 3000);
-  }); */
+  /*  
+   *  Hides / shows scanning message when modals are clicked. 
+   *  $('.item-modal').click(function() {
+   $('.load-prog').show();
+   $('.load-msg').hide();
+   setTimeout(function() {
+   $('.load-prog').hide();
+   $('.load-msg').show();
+   }, 3000);
+   }); */
 
-  $('#shop-btn').click(function() {
-    fill_table('#apd-table > tbody');
-  });
+  // used to fill in the table w/ dummy data. not needed anymore
+  /*  $('#shop-btn').click(function() {
+      fill_table('#apd-table > tbody');
+      }); */
 
-  $('#shopModal').on('hidden', function () {
-    $('#apd-table tr:gt(0)').each( function() {
-      $(this).remove();
+  /*$('#shop-modal-remove').click(function() {
+    $(this).closest('tr').remove();
+    }*/
+
+  $('#shopList').click(function() {
+    shopdbGetItems(function(items) {
+      $.each(items, function(i, item) {
+        $('#apd-table > tbody').append('<tr><td>'+item.item+'<button class="close">x</button></td></tr>');
+        $('#apd-table button:last').on('click', function() {
+          var text = $(this).closest('td').text();
+          text = text.substring(0, text.length -1);
+          $(this).closest('tr').remove();
+          shopdbRemoveItem(text, function() { /*noting*/ });
+        });
+      });
     });
   });
 
   $('#modal-add').click(function() {
     var txt = $('#modal-input').val();
-    $('#apd-table > tbody').append('<tr><td>'+txt+'</tr></td>');
+    $('#apd-table > tbody').append('<tr><td>'+txt+'<button class="close">x</button></td></tr>');
+    $('#apd-table button:last').on('click', function() {
+      var text = $(this).closest('td').text();
+      text = text.substring(0, text.length -1);
+      $(this).closest('tr').remove();
+      shopdbRemoveItem(text, function() { /*noting*/ });
+    });
+    shopdbInsertItem(txt, function() { /* nothing */ });
+    $('#modal-input').val('');
+  });
+
+  $('#shopModal').on('hidden', function () {
+    $('#apd-table td').each(function() {
+      text = $(this).text();
+      text = text.substring(0, text.length -1);
+    });
+    $('#apd-table body').empty();
   });
 
   $('#item-remove-modal-button').click(function () {
-   name = $('#item-remove-modal-name').val().toLowerCase();
-   dbRemoveItem(name, function () {
-    $('#item-remove-modal-name').val('');
-    $('#item-remove-modal-success-alert').show();
+    name = $('#item-remove-modal-name').val().toLowerCase();
+    dbRemoveItem(name, function () {
+      $('#item-remove-modal-name').val('');
+      $('#item-remove-modal-success-alert').show();
 
-    setTimeout(function() {
-      $('#item-remove-modal-success-alert').hide();
-    }, 3000);
+      setTimeout(function() {
+        $('#item-remove-modal-success-alert').hide();
+      }, 3000);
 
-   });
+    });
   });
 
   $('#item-insert-modal-button').click(function () {
-   $('#item-insert-modal-date-error-alert').hide();
-   name = $('#item-insert-modal-name').val().toLowerCase();
-   expires = $('#item-insert-modal-expires').val();
-   quantity = '100';
+    $('#item-insert-modal-date-error-alert').hide();
+    name = $('#item-insert-modal-name').val().toLowerCase();
+    expires = $('#item-insert-modal-expires').val();
+    quantity = '100';
 
-   if (!validateDate(expires)){
-    $('#item-insert-modal-date-error-alert').show();
-    return;
-   }
+    if (!validateDate(expires)){
+      $('#item-insert-modal-date-error-alert').show();
+      return;
+    }
 
 
-   $('body').css('cursor','wait');
-   dbInsertItem(name, quantity, expires, function () {
-    $('#item-insert-modal-name').val('');
-    $('#item-insert-modal-expires').val('');
-    $('#item-insert-modal-success-alert').show();
-    $('body').css('cursor','default');
+    $('body').css('cursor','wait');
+    dbInsertItem(name, quantity, expires, function () {
+      $('#item-insert-modal-name').val('');
+      $('#item-insert-modal-expires').val('');
+      $('#item-insert-modal-success-alert').show();
+      $('body').css('cursor','default');
 
-    setTimeout(function() {
-      $('#item-insert-modal-success-alert').hide();
-    }, 3000);
+      setTimeout(function() {
+        $('#item-insert-modal-success-alert').hide();
+      }, 3000);
 
-   });
+    });
   });
 
-  
+
 
 
 });
