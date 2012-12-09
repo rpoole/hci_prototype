@@ -168,10 +168,18 @@ function fill_item_list_table() {
         item_status = "OUT";
       }
 
-    item_text = capitalizeFirstLetter(item.item);
+    var item_text = capitalizeFirstLetter(item.item);
     $('#item-list > tbody').append('<tr class="' + tr_class + '"><td>'+ item_text 
       +'</td><td>'+item.quantity+'%</td><td>'+item_status+'</td><td>'+ item.expires +
-      '</td></tr>');
+      '</td><td><button style="float:center" class="btn item-table-btn">Add</button></td></tr>');
+    $('#item-list button:last').on("click", function() {
+      shopdbInsertItem(item_text, function() { 
+        $('#item-list-item-added').show();
+        setTimeout(function() {
+          $('#item-list-item-added').hide();
+            }, 3000);
+      });
+    });
     });
   });
 }
