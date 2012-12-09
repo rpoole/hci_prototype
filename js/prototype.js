@@ -158,16 +158,27 @@ $(document).ready(function(){
   $('#item-remove-modal-button').click(function () {
    name = $('#item-remove-modal-name').val();
    dbRemoveItem(name, function () {
-     alert("Removed!");
+    $('#item-remove-modal-name').val('Item Name');
+    $('#item-remove-modal-success-alert').show();
+
+    setTimeout(function() {
+      $('#item-remove-modal-success-alert').hide();
+    }, 3000);
+
    });
   });
-
 
   $('#item-insert-modal-button').click(function () {
    name = $('#item-insert-modal-name').val();
    quantity = '100';
    dbInsertItem(name, quantity, function () {
-     alert("Inserted!");
+    $('#item-insert-modal-name').val('Item Name');
+    $('#item-insert-modal-success-alert').show();
+
+    setTimeout(function() {
+      $('#item-insert-modal-success-alert').hide();
+    }, 3000);
+
    });
   });
 

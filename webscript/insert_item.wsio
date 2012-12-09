@@ -1,0 +1,23 @@
+function insertitem(itemlist, item, quantity)
+	if item == "" or quantity < 0 then
+		return -1
+	end
+
+	-- find index
+	local index = #itemlist+1
+	-- insert new score
+	table.insert(itemlist, index, {item=item,quantity=quantity})
+end
+ 
+-- ensure that only one process modifies the data at a time
+lease.acquire('itemDB')
+ 
+local items = json.parse(storage.itemDB or '[]')
+itemname = request.query.item_name or ""
+quantity = tonumber(request.query.quantity) or -1
+insertitem(items,itemname,quantity)
+storage.itemDB = json.stringify(items)
+ 
+lease.release('itemDB')
+ 
+return items
