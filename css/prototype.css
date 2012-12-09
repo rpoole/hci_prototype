@@ -9,3 +9,7 @@
 .input-append button.add-on {
     height: inherit !important;
 }
+
+.cal-event {
+  background-color : #bd362f;
+}

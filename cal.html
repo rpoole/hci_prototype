@@ -9,6 +9,7 @@
     <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.2.min.js" ></script>
     <script type="text/javascript" src="js/bootstrap.js" ></script>
     <script type="text/javascript" src="js/bootstrap.calendar.js" ></script>
+    <script type="text/javascript" src="js/prototype.js" ></script>
 
     <style>
       body {
@@ -16,17 +17,55 @@
       }
     </style>
 
+    <!-- this does a bunch of stuff and i should put it in a different file. -->
     <script type="text/javascript">
       $(document).ready(function(){
+          var item_list = [];
+          dbGetItems(function(items) {
+            $.each(items, function(i, item){
+              item_list.push(item);  
+              });
+            doCal();
+            $.each(items, function(i, item){
+              day = item.expires.split('-')[1];
+              month = item.expires.split('-')[0];
+              year = item.expires.split('-')[2];
+              $('td[day=' + parseInt(day)+'][month=' + parseInt(month) + '][year=' + year + ']').addClass('cal-event');
+              });
+            });
 
+          function doCal(){
           var evnts = function(){
-            return {
-              "event": []
-            }
+          return {
+          "event": [
+          ]
+          }
           };
 
-          $('#calendar').Calendar({ 'events': evnts, 'weekStart': 1 })
-            .on('changeDay', function(event){ $('#expiresModal').modal(); })
+          $('#calendar').Calendar({ 'events': evnts, 'weekStart': 1 }).on('changeDay', function(event){
+            var dayStr = event.day.valueOf().toString();
+            var monthStr = event.month.valueOf().toString();
+            var yearStr = event.year.valueOf().toString();
+
+            if (event.day.valueOf() < 10){
+            dayStr = "0" + dayStr;
+            }
+
+            if (event.month.valueOf() < 10){
+            monthStr = "0" + monthStr;
+            }
+
+            var date = monthStr + "-" + dayStr + "-" + yearStr;
+
+            $.each(item_list, function(i, item){
+              if(item.expires == date){
+                $('#cal-modal-body').text('');
+                $('#cal-modal-body').text(capitalizeFirstLetter(item.item) + ' expires today!');
+                $('#expiresModal').modal();
+                }
+              });
+            });
+          }
       });
 </script>
   </head>
@@ -42,20 +81,18 @@
       </form>
     </div> <!-- /container -->
 
-      <!-- Expries Modal -->
-      <div id="expiresModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
-          <h3 id="myModalLabel"> Food Status</h3>
-        </div>
-        <div class="modal-body">
-          Eggs expire today.<br>
-          Salsa expired 2 weeks ago.
-        </div>
-        <div class="modal-footer">
-          <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-        </div>
+    <!-- Expries Modal -->
+    <div id="expiresModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+        <h3 id="myModalLabel"> Food Status</h3>
       </div>
+      <div id="cal-modal-body" class="modal-body">
+      </div>
+      <div class="modal-footer">
+        <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+      </div>
+    </div>
   </body>
 </html>
 
