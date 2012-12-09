@@ -227,6 +227,7 @@ $(document).ready(function(){
     }*/
 
   $('#shopList').click(function() {
+    $('#apd-table > tbody').empty();
     shopdbGetItems(function(items) {
       $.each(items, function(i, item) {
         $('#apd-table > tbody').append('<tr><td>'+item.item+'<button class="close">x</button></td></tr>');
